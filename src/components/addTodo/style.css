@@ -1,0 +1,49 @@
+div#AddTodo{
+    flex: 1 1 25%;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-right: 30px;
+    padding: 20px 10px;
+    background-color: white;
+    max-height: 235px;
+}
+
+div#AddTodo *{
+    margin: 10px;
+}
+
+label{
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+label~input, label~select{
+    width: 80%;
+    padding: 5px;
+    border: 2px solid black;
+}
+
+button#add{
+    background-color: #25aa5a;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    width: 30%;
+    color: white;
+    font-weight: bold;
+}
+
+button#cancel{
+    background-color: #a92525;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    width: 30%;
+    color: white;
+    font-weight: bold;
+}
+
+h6{
+    color: red;
+    margin-top: 0px!important;
+}
