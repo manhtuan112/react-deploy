@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Todolist from "./components/Todolist";
 import AddNewTodo from "./components/addTodo";
+
 function App() {
   const [todos, setTodos] = useState([
     // {
@@ -11,7 +12,6 @@ function App() {
     // },
   ]);
 
-
   const convertLevel = ["Nguy cấp", "Chưa cần", "Ngay và luôn"];
 
   const [editing, setEditing] = useState(null);
@@ -20,14 +20,13 @@ function App() {
 
   const [filterList, setFilterList] = useState(todos);
 
-  useEffect(()=>{
+  useEffect(() => {
     const tasks = localStorage.getItem("tasks");
-    if(tasks){
-      const listTodo = JSON.parse(tasks)
-      setTodos(listTodo)
+    if (tasks) {
+      const listTodo = JSON.parse(tasks);
+      setTodos(listTodo);
     }
-  },[])
-
+  }, []);
 
   const changeLevel = (todo) => {
     const index = todos.findIndex((item) => item.id === todo.id);
@@ -36,57 +35,54 @@ function App() {
     const newTodo = [...todos];
     newTodo[index] = todo;
     setTodos(newTodo);
-    
   };
 
-  
-  
   useEffect(() => {
-    setFilterList(todos)
+    setFilterList(todos);
   }, [todos]);
 
-
-  useEffect(()=>{
-    localStorage.setItem('tasks', JSON.stringify(todos))
-  },[todos])
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(todos));
+  }, [todos]);
 
   return (
-    <>
-      <h1>To Do List - Team Web D19</h1>
-      <div id="container">
-        {showAdd ? (
-          <AddNewTodo
-            todo={todos}
-            setTodo={setTodos}
-            setShowAdd={setShowAdd}
-            setEditing={setEditing}
-            editing={editing}
-            level={convertLevel}
-            setFilterList={setFilterList}
-          />
-        ) : null}
-        <div id="left">
-          <button
-            id="addNewTodo"
-            onClick={() => {
-              setShowAdd(!showAdd);
-            }}
-          >
-            Thêm công việc mới
-          </button>
-          <Todolist
-            todo={todos}
-            setTodo={setTodos}
-            setEditing={setEditing}
-            setShowAdd={setShowAdd}
-            level={convertLevel}
-            changeLevel={changeLevel}
-            filterList={filterList}
-            setFilterList={setFilterList}
-          />
+    <div>
+        <h1> To Do List - Team Web D19 </h1>
+        <div id="container">
+          
+          {showAdd ? (
+            <AddNewTodo
+              todo={todos}
+              setTodo={setTodos}
+              setShowAdd={setShowAdd}
+              setEditing={setEditing}
+              editing={editing}
+              level={convertLevel}
+              setFilterList={setFilterList}
+            />
+          ) : null}
+          <div id="left">
+            <button
+              id="addNewTodo"
+              onClick={() => {
+                setShowAdd(!showAdd);
+              }}
+            >
+              Thêm công việc mới
+            </button>
+            <Todolist
+              todo={todos}
+              setTodo={setTodos}
+              setEditing={setEditing}
+              setShowAdd={setShowAdd}
+              level={convertLevel}
+              changeLevel={changeLevel}
+              filterList={filterList}
+              setFilterList={setFilterList}
+            />
+          </div>
         </div>
-      </div>
-    </>
+    </div>
   );
 }
 
