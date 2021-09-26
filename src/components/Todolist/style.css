@@ -38,7 +38,7 @@ td>button:last-child{
 
 
 input#input__search,
-select#level{
+select#level, select.filter_by_level{
     width: 20%;
     padding: 5px 15px;
     font-weight: bold;
@@ -48,7 +48,8 @@ select#level{
 }
 
 .btn__search,
-.btn__sort{
+.btn__sort,
+.btn__filter{
     padding: 5px 15px;
     font-weight: bold;
     background-color: #a92525;

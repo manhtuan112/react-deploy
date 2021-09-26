@@ -15,7 +15,7 @@ const Listtodo = ({
   const selectOption = ["Id", "Name", "Muc do"];
   // const [searchValue, setSearchValue] = useState("");
   const search = useRef(null);
-
+  const filterLevel = useRef("all")
   const [checkEmptyFilter, setCheckEmptyFilter] = useState(false);
   const [checkEmptyInputSearch, setCheckEmptyInputSearch] = useState(false);
 
@@ -74,12 +74,13 @@ const Listtodo = ({
     setShowAdd(true);
   };
 
-  const setOptionFilter = (index) => {
+  const setOptionFilter = (e) => {
+    let index = filterLevel.current.value
     if (index === "all") {
       setFilterList(todo);
       setCheckEmptyFilter(false);
     } else {
-      index = level[index]; //lay gia tri can loc
+      index = level[+index]; //lay gia tri can loc
       const filterTodo = todo.filter((item) => item.level === index);
 
       if (filterTodo.length === 0) setCheckEmptyFilter(true);
@@ -134,6 +135,18 @@ const Listtodo = ({
         Sắp xếp
       </button>
       <br />
+
+      <select className="filter_by_level" id="" ref = {filterLevel}>
+          <option value="all">Tất cả</option>
+          {level.map((item, index) => (
+            <option value={index}>
+              {item}
+            </option>
+          ))}
+      </select>
+      
+      <button className = "btn__filter" onClick={setOptionFilter}>Lọc theo mức độ</button> <br/>
+
       <input type="text" id="input__search" ref={search} />
       <button className="btn__search" onClick={handleSearch}>
         Tìm kiếm
@@ -180,16 +193,7 @@ const Listtodo = ({
       ) : (
         "Không có công việc"
       )}
-      <div className="wr-filter">
-        <span className="filter" onClick={() => setOptionFilter("all")}>
-          Tat ca
-        </span>
-        {level.map((item, index) => (
-          <span className="filter" onClick={() => setOptionFilter(index)}>
-            {item}
-          </span>
-        ))}
-      </div>
+      
     </div>
   );
 };
