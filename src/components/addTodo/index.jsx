@@ -116,9 +116,9 @@ const AddNewTodo = ({
       <br />
       <select name="level" value={newTodo.level} onChange={onChangeTodo}>
         {level.map((level) => (
-          <div>
+          
             <option value={level}>{level}</option>
-          </div>
+          
         ))}
       </select>
       <br />
